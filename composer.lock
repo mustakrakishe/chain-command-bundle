@@ -4,8 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eaf3840901e73993aa2482ef20a928b9",
+    "content-hash": "7afcf3acd8aff17c9deff53de32460bb",
     "packages": [
+        {
+            "name": "mustakrakishe/foo-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "bundle/Mustakrakishe/FooBundle",
+                "reference": "5241f61865864e7e4392ddae085c9cd2aacc8f7d"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Mustakrakishe\\FooBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Implements a console command to print \"Hello from Foo!\"",
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "psr/cache",
             "version": "3.0.0",
