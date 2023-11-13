@@ -1,0 +1,12 @@
+{
+    "name": "mustakrakishe/bar-bundle",
+    "description": "Implements a console command to print \"Hi from Bar!\"",
+    "version": "1.0.0",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mustakrakishe\\BarBundle\\": "src/"
+        }
+    }
+}
