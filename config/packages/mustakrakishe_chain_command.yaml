@@ -1,0 +1,10 @@
+mustakrakishe_chain_command:
+    chains:
+
+        # master_command:
+        #     -   command: member_command
+        #         param_key_1: param_value_1
+        #         param_key_2: param_value_2
+
+        foo:hello:
+            -   command: bar:hi

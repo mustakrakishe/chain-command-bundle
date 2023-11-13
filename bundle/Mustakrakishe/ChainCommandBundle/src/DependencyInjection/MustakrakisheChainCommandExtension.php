@@ -17,5 +17,10 @@ class MustakrakisheChainCommandExtension extends Extension
         );
 
         $loader->load('services.yaml');
+
+        $container->setParameter(
+            'mustakrakishe_chain_command.chains',
+            $configs[0]['chains']
+        );
     }
 }

@@ -7,3 +7,6 @@ services:
     Mustakrakishe\ChainCommandBundle\:
         resource: '../src/'
 
+    Mustakrakishe\ChainCommandBundle\Repository\ChainRepository:
+        arguments: 
+            $chains: '%mustakrakishe_chain_command.chains%'
