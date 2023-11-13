@@ -7,12 +7,17 @@
         {
             "type": "path",
             "url": "bundle/Mustakrakishe/FooBundle"
+        },
+        {
+            "type": "path",
+            "url": "bundle/Mustakrakishe/BarBundle"
         }
     ],
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "mustakrakishe/bar-bundle": "^1.0",
         "mustakrakishe/foo-bundle": "^1.0",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",

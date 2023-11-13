@@ -4,8 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7afcf3acd8aff17c9deff53de32460bb",
+    "content-hash": "baf7fd06adead79fd85547523495c365",
     "packages": [
+        {
+            "name": "mustakrakishe/bar-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "bundle/Mustakrakishe/BarBundle",
+                "reference": "c44d92dcfdcb406160fe6c3ff01ad455d5c17b29"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Mustakrakishe\\BarBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Implements a console command to print \"Hi from Bar!\"",
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "mustakrakishe/foo-bundle",
             "version": "1.0.0",
