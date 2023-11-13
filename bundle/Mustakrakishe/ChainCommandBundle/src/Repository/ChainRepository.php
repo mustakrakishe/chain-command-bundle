@@ -37,4 +37,20 @@ class ChainRepository
 
         return null;
     }
+
+    /**
+     * Determines whether the command is registered as an any chain master.
+     */
+    public function isChainMaster(string $commandName): bool
+    {
+        return array_key_exists($commandName, $this->chains);
+    }
+
+    /**
+     * Gets registered master command chained commands.
+     */
+    public function getChainMembers(string $masterCommandName): array
+    {
+        return $this->chains[$masterCommandName] ?? [];
+    }
 }

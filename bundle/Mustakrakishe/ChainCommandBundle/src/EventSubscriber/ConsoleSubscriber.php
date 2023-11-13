@@ -2,9 +2,11 @@
 
 namespace Mustakrakishe\ChainCommandBundle\EventSubscriber;
 
+use Mustakrakishe\ChainCommandBundle\Event\Chain\Master\ChainMasterTerminatedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Member\ChainMemberExecutedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Repository\ChainRepository;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -25,7 +27,9 @@ class ConsoleSubscriber implements EventSubscriberInterface
         return [
             ConsoleCommandEvent::class => [
                 ['dispatchRegisteredCommandExecutedExplictlyEvent'],
-                ['dispatchRegisteredCommandExecutedEvent'],
+            ],
+            ConsoleTerminateEvent::class => [
+                ['dispatchRegisteredCommandTerminatedExplictlyEvent'],
             ],
         ];
     }
@@ -42,6 +46,26 @@ class ConsoleSubscriber implements EventSubscriberInterface
         if ($this->chains->isChainMember($commandName)) {
             $this->dispatcher->dispatch(
                 new ChainMemberExecutedExplictlyEvent($event)
+            );
+        }
+    }
+
+    /**
+     * Dispatches a relevant event
+     * if an explictly terminated command
+     * is registered in chains.
+     */
+    public function dispatchRegisteredCommandTerminatedExplictlyEvent(ConsoleTerminateEvent $event): void
+    {
+        $commandName = $event->getCommand()->getName();
+
+        if ($this->chains->isChainMember($commandName)) {
+            return;
+        }
+
+        if ($this->chains->isChainMaster($commandName)) {
+            $this->dispatcher->dispatch(
+                new ChainMasterTerminatedExplictlyEvent($event)
             );
         }
     }
