@@ -1,0 +1,12 @@
+{
+    "name": "mustakrakishe/foo-bundle",
+    "description": "Implements a console command to print \"Hello from Foo!\"",
+    "version": "1.0.0",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mustakrakishe\\FooBundle\\": "src/"
+        }
+    }
+}
