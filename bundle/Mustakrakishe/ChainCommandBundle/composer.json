@@ -1,0 +1,12 @@
+{
+    "name": "mustakrakishe/chain-command-bundle",
+    "description": "Implements a console command chaining functional",
+    "version": "1.0.0",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mustakrakishe\\ChainCommandBundle\\": "src/"
+        }
+    }
+}
