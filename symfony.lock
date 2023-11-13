@@ -2,6 +2,9 @@
     "mustakrakishe/bar-bundle": {
         "version": "1.0.0"
     },
+    "mustakrakishe/chain-command-bundle": {
+        "version": "1.0.0"
+    },
     "mustakrakishe/foo-bundle": {
         "version": "1.0.0"
     },

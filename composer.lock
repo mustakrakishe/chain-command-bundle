@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "baf7fd06adead79fd85547523495c365",
+    "content-hash": "9389ecf735539929771ca1205ac89a2a",
     "packages": [
         {
             "name": "mustakrakishe/bar-bundle",
@@ -24,6 +24,28 @@
                 "MIT"
             ],
             "description": "Implements a console command to print \"Hi from Bar!\"",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "mustakrakishe/chain-command-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "bundle/Mustakrakishe/ChainCommandBundle",
+                "reference": "236b0f0f47743d005f258e57dc0c75cce7203289"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Mustakrakishe\\ChainCommandBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Implements a console command chaining functional",
             "transport-options": {
                 "relative": true
             }
