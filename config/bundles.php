@@ -5,4 +5,5 @@ return [
     Mustakrakishe\FooBundle\MustakrakisheFooBundle::class => ['all' => true],
     Mustakrakishe\BarBundle\MustakrakisheBarBundle::class => ['all' => true],
     Mustakrakishe\ChainCommandBundle\MustakrakisheChainCommandBundle::class => ['all' => true],
+    Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
 ];
