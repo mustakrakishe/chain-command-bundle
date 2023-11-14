@@ -10,3 +10,6 @@ services:
     Mustakrakishe\ChainCommandBundle\Repository\ChainRepository:
         arguments: 
             $chains: '%mustakrakishe_chain_command.chains%'
+
+    mustakrakishe_chain_command.util.formatter:
+        class: Mustakrakishe\ChainCommandBundle\Util\Formatter

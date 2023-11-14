@@ -1,6 +1,15 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - chain-command
+
+    handlers:
+        chain-command:
+            type: stream
+            path: "%kernel.logs_dir%/chain-command.log"
+            level: info
+            channels: ["chain-command"]
+            formatter: "mustakrakishe_chain_command.util.formatter"
 
 when@dev:
     monolog:
@@ -9,7 +18,7 @@ when@dev:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
-                channels: ["!event"]
+                channels: ["!event", "!chain-command"]
             # uncomment to get logging in your browser
             # you may have to allow bigger header sizes in your Web server configuration
             #firephp:
@@ -21,7 +30,7 @@ when@dev:
             console:
                 type: console
                 process_psr_3_messages: false
-                channels: ["!event", "!doctrine", "!console"]
+                channels: ["!event", "!doctrine", "!console", "!chain-command"]
 
 when@test:
     monolog:
@@ -31,7 +40,7 @@ when@test:
                 action_level: error
                 handler: nested
                 excluded_http_codes: [404, 405]
-                channels: ["!event"]
+                channels: ["!event", "!chain-command"]
             nested:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
@@ -54,7 +63,7 @@ when@prod:
             console:
                 type: console
                 process_psr_3_messages: false
-                channels: ["!event", "!doctrine"]
+                channels: ["!event", "!doctrine", "!chain-command"]
             deprecation:
                 type: stream
                 channels: [deprecation]
