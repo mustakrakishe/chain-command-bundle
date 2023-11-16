@@ -13,3 +13,6 @@ services:
 
     mustakrakishe_chain_command.util.formatter:
         class: Mustakrakishe\ChainCommandBundle\Util\Formatter
+
+    Mustakrakishe\ChainCommandBundle\Service\LoggingService:
+        $logger: '@monolog.logger.chain-command'

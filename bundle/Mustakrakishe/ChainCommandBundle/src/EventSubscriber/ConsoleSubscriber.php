@@ -2,6 +2,7 @@
 
 namespace Mustakrakishe\ChainCommandBundle\EventSubscriber;
 
+use Mustakrakishe\ChainCommandBundle\Event\Chain\Master\ChainMasterExecutedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Master\ChainMasterTerminatedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Member\ChainMemberExecutedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Repository\ChainRepository;
@@ -46,6 +47,14 @@ class ConsoleSubscriber implements EventSubscriberInterface
         if ($this->chains->isChainMember($commandName)) {
             $this->dispatcher->dispatch(
                 new ChainMemberExecutedExplictlyEvent($event)
+            );
+
+            return;
+        }
+
+        if ($this->chains->isChainMaster($commandName)) {
+            $this->dispatcher->dispatch(
+                new ChainMasterExecutedExplictlyEvent($event)
             );
         }
     }
