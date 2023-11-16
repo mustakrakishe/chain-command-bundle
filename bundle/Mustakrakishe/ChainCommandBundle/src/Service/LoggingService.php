@@ -91,4 +91,14 @@ class LoggingService
             ]
         );
     }
+
+    /**
+     * Logs a formated output buffer.
+     */
+    public function logOutputBuffer(string $outputBuffer): void
+    {
+        $this->logger->info(
+            trim($outputBuffer)
+        );
+    }
 }
