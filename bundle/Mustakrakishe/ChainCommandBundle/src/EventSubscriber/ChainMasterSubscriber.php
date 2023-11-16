@@ -7,6 +7,7 @@ use Mustakrakishe\ChainCommandBundle\Event\Chain\ChainMemberQueueStartedEvent;
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Master\ChainMasterExecutedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Master\ChainMasterTerminatedExplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Master\ChainMasterTerminatedImplictlyEvent;
+use Mustakrakishe\ChainCommandBundle\Event\Chain\Member\ChainMemberTerminatedImplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Repository\ChainRepository;
 use Mustakrakishe\ChainCommandBundle\Service\CommandService;
 use Mustakrakishe\ChainCommandBundle\Service\LoggingService;
@@ -131,11 +132,21 @@ class ChainMasterSubscriber implements EventSubscriberInterface
         );
 
         foreach ($members as $member) {
-            $app->find($member['command'])
-                ->run(
-                    new ArrayInput($member),
-                    $output
-                );
+            $outputBuffer = '';
+
+            $exitCode = $this->commandService->runWithBufferedOutput(
+                $app->find($member['command']),
+                new ArrayInput($member),
+                $outputBuffer
+            );
+
+            $this->dispatcher->dispatch(
+                new ChainMemberTerminatedImplictlyEvent(
+                    $member,
+                    $exitCode,
+                    $outputBuffer
+                )
+            );
         }
 
         $this->dispatcher->dispatch(

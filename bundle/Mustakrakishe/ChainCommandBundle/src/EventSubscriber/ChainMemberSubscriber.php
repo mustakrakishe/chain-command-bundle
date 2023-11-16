@@ -3,8 +3,10 @@
 namespace Mustakrakishe\ChainCommandBundle\EventSubscriber;
 
 use Mustakrakishe\ChainCommandBundle\Event\Chain\Member\ChainMemberExecutedExplictlyEvent;
+use Mustakrakishe\ChainCommandBundle\Event\Chain\Member\ChainMemberTerminatedImplictlyEvent;
 use Mustakrakishe\ChainCommandBundle\Repository\ChainRepository;
 use Mustakrakishe\ChainCommandBundle\Service\CommandService;
+use Mustakrakishe\ChainCommandBundle\Service\LoggingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -15,6 +17,7 @@ class ChainMemberSubscriber implements EventSubscriberInterface
     public function __construct(
         private ChainRepository $chains,
         private CommandService $commandService,
+        private LoggingService $loggingService,
     ) {
     }
 
@@ -23,6 +26,10 @@ class ChainMemberSubscriber implements EventSubscriberInterface
         return [
             ChainMemberExecutedExplictlyEvent::class => [
                 ['terminateCommandAsInvalid'],
+            ],
+            ChainMemberTerminatedImplictlyEvent::class => [
+                ['displayOutputBuffer'],
+                ['logChainMemberTerminated'],
             ],
         ];
     }
@@ -50,6 +57,24 @@ class ChainMemberSubscriber implements EventSubscriberInterface
             'Error: %s command is a member of %s command chain and cannot be executed on its own.',
             $memberCommandName,
             $this->chains->getChainMasterName($memberCommandName)
+        );
+    }
+
+    /**
+     * Displays a command output buffer in console.
+     */
+    public function displayOutputBuffer(ChainMemberTerminatedImplictlyEvent $event): void
+    {
+        echo $event->getOutputBuffer();
+    }
+
+    /**
+     * Logs a chain member implict execution finish.
+     */
+    public function logChainMemberTerminated(ChainMemberTerminatedImplictlyEvent $event): void
+    {
+        $this->loggingService->logOutputBuffer(
+            $event->getOutputBuffer()
         );
     }
 }
