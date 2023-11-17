@@ -6,7 +6,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Mustakrakishe\\ChainCommandBundle\\": "src/"
+            "Mustakrakishe\\ChainCommandBundle\\": "src/",
+            "Mustakrakishe\\ChainCommandBundle\\Test\\": "tests/"
         }
     }
 }
